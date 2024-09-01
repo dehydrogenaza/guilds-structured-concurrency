@@ -1,25 +1,26 @@
 import java.util.Random;
 
 public class Tasks {
-  String getFoo() throws InterruptedException {
-    int delay = new Random().nextInt(1000) + 1000;
-    System.out.println("getFoo delaying for: " + delay);
+  String longTask() throws InterruptedException {
+    int delay = new Random().nextInt(1000) + 4000;
+    System.out.println("longTask delaying for: " + delay);
     Thread.sleep(delay);
-//    throw new RuntimeException("getFoo failed");
-    System.out.println("getFoo finished");
-    return "foo";
+//    throw new RuntimeException("longTask failed");
+    System.out.println("longTask finished");
+    return "\n- long task result,";
   }
 
-  String getBar() throws InterruptedException {
-    int delay = new Random().nextInt(1000) + 2000;
-    System.out.println("getBar delaying for: " + delay);
+  String shortTask() throws InterruptedException {
+    int delay = new Random().nextInt(1000) + 1000;
+    System.out.println("shortTask delaying for: " + delay);
     Thread.sleep(delay);
-    System.out.println("getBar finished");
-    return "bar";
+//    throw new RuntimeException("shortTask failed");
+    System.out.println("shortTask finished");
+    return "\n- short task result,";
   }
 
   String fail() throws InterruptedException {
-    Thread.sleep(1800);
+    Thread.sleep(2500);
     throw new RuntimeException("OH NO :-(");
   }
 }
