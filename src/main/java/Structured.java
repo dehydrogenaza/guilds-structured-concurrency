@@ -19,14 +19,17 @@ public class Structured {
       Supplier<String> longTask = scope.fork(tasks::longTask);
       Supplier<String> shortTask = scope.fork(tasks::shortTask);
 
-//      Supplier<String> fail = scope.fork(tasks::fail);
-
-//      Supplier<String> subTask = scope.fork(Structured::runSubTask);
+      Supplier<String> subTask = scope.fork(Structured::runSubTask);
 
       scope.join()
           .throwIfFailed();
 
-      System.out.println("ALL TASKS FINISHED WITH: " + longTask.get() + shortTask.get());
+      String shortResult = shortTask.get();
+      System.out.println("Retrieved shortTask result");
+      String longResult = longTask.get();
+      System.out.println("Retrieved longTask result");
+
+      System.out.println("ALL TASKS FINISHED WITH: " + longResult + shortResult);
     }
   }
 
@@ -37,7 +40,8 @@ public class Structured {
         System.out.println("subTask finished");
         return 1;
       });
-      throw new RuntimeException("subTask failed");
+      throw new RuntimeException("actually, subTask failed");
+//      return "abc";
     }
   }
 }

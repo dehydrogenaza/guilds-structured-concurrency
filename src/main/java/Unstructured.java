@@ -4,7 +4,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 public class Unstructured {
-  public static void main(String[] args) {
+  public static void main() {
     System.out.println("Goodbye, Unstructured Concurrency!");
 
     try {
@@ -20,12 +20,14 @@ public class Unstructured {
       Future<String> longTask = executor.submit(tasks::longTask);
       Future<String> shortTask = executor.submit(tasks::shortTask);
 
-//      Future<String> fail = executor.submit(tasks::fail);
-//      String failResult = fail.get();
-
 //      Future<String> subTask = executor.submit(Unstructured::runSubTask);
 
-      System.out.println("ALL TASKS FINISHED WITH: " + longTask.get() + shortTask.get());
+      String shortResult = shortTask.get();
+      System.out.println("Retrieved shortTask result");
+      String longResult = longTask.get();
+      System.out.println("Retrieved longTask result");
+
+      System.out.println("ALL TASKS FINISHED WITH: " + longResult + shortResult);
     }
   }
 
@@ -36,7 +38,7 @@ public class Unstructured {
         System.out.println("subTask finished");
         return 1;
       });
-      throw new RuntimeException("subTask failed");
+      throw new RuntimeException("actually, subTask failed");
     }
   }
 }
