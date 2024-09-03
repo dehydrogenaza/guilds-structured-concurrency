@@ -19,7 +19,7 @@ public class Structured {
       Supplier<String> longTask = scope.fork(tasks::longTask);
       Supplier<String> shortTask = scope.fork(tasks::shortTask);
 
-      Supplier<String> subTask = scope.fork(Structured::runSubTask);
+//      Supplier<String> subTask = scope.fork(Structured::runSubTask);
 
       scope.join()
           .throwIfFailed();
